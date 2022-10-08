@@ -3,6 +3,7 @@ import EditProfile from "./components/EditProfile"
 import CurrentProfile from "./components/CurrentProfile"
 import React, { useState, useEffect } from "react"
 import Navbar from "./components/Navbar"
+// import Profiles from "./components/Profiles"
 
 function App() {
   // eslint-disable-next-line
