@@ -1,13 +1,15 @@
 import "./App.css"
 import EditProfile from "./components/EditProfile"
-import Profile from "./components/Profile"
+import CurrentProfile from "./components/CurrentProfile"
 import React, { useState, useEffect } from "react"
 import Navbar from "./components/Navbar"
 
 function App() {
+  // eslint-disable-next-line
   const [currentUser, setCurrentUser] = useState({
     profile: {},
   })
+  const [profiles, setProfiles] = useState([])
   const [currentProfile, setCurrentProfile] = useState({})
 
   useEffect(() => {
@@ -18,6 +20,15 @@ function App() {
         setCurrentProfile(user.profile)
       })
   }, [])
+
+  useEffect(() => {
+    fetch("/profiles")
+      .then((r) => r.json())
+      .then(setProfiles)
+  }, [currentProfile])
+
+  console.log(profiles)
+  console.log(currentProfile)
 
   function handleUpdateProfilePicUrl(profile_pic_url) {
     const newProfileObj = { ...currentProfile }
@@ -32,18 +43,17 @@ function App() {
     newProfileObj.email = profileData.email
     newProfileObj.user_id = profileData.user_id
     setCurrentProfile(newProfileObj)
-
   }
 
   return (
     <div className="App">
-      <Navbar profile={currentProfile}/>
+      <Navbar profile={currentProfile} />
       <EditProfile
         onUpdateProfilePic={handleUpdateProfilePicUrl}
         onUpdateProfile={handleUpdateProfile}
         profile={currentProfile}
       />
-      <Profile profile={currentProfile} />
+      <CurrentProfile profile={currentProfile} />
     </div>
   )
 }
