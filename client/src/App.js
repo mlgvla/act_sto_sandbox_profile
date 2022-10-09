@@ -2,7 +2,7 @@ import "./App.css"
 import EditProfile from "./components/EditProfile"
 import CurrentProfile from "./components/CurrentProfile"
 import React, { useState, useEffect } from "react"
-import Navbar from "./components/Navbar"
+import NavBar from "./components/NavBar"
 // import Profiles from "./components/Profiles"
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
   const [currentProfile, setCurrentProfile] = useState({})
 
   useEffect(() => {
-    fetch("/users/3")
+    fetch("/users/1")
       .then((r) => r.json())
       .then((user) => {
         setCurrentUser(user)
@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar profile={currentProfile} />
+      <NavBar profile={currentProfile} />
       <EditProfile
         onUpdateProfilePic={handleUpdateProfilePicUrl}
         onUpdateProfile={handleUpdateProfile}
